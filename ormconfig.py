@@ -3,7 +3,7 @@ import inspect
 import codecs
 
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 
 _PY2 = sys.version_info[0] == 2
@@ -64,6 +64,10 @@ class BoolField(Field):
 
 class IntField(Field):
     coerce = int
+
+
+class LongField(Field):
+    coerce = long
 
 
 class FloatField(Field):
