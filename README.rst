@@ -11,6 +11,7 @@ example.ini::
     [Section1]
     bool_field = True
     int_field = 123
+    #int_default_field = 567
     float_field = 456.7
     string_field = hello, world
 
@@ -28,6 +29,7 @@ example.py::
         class Section1(Section):
             bool_field = BoolField()
             int_field = IntField()
+            int_default_field = IntField(default='default value 6')
             float_field = FloatField()
             string_field = StringField()
         class Section2(Section):
@@ -43,6 +45,7 @@ example.py::
 
     print(config.Section1.bool_field)
     print(config.Section1.int_field)
+    print(config.Section1.int_default_field)
     print(config.Section1.float_field)
     print(config.Section1.string_field)
     print(config.Section2.ip_field)
@@ -53,7 +56,9 @@ output::
 
     True
     123
+    default value 6
     456.7
     hello, world
     127.0.0.1
     ('127.0.0.1', 12345)
+    [('127.0.0.1', 12345), ('127.0.0.2', 12346)]

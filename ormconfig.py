@@ -113,7 +113,8 @@ class IPPortField(Field):
 
 
 class ListField(Field):
-    def __init__(self, element_field):
+    def __init__(self, element_field, default=None):
+        Field.__init__(self, default)
         self.element_field = element_field
 
     def coerce(self, value):
@@ -167,7 +168,8 @@ class Config:
                     if field.default is None:
                         raise Error(str(e))
                     else:
-                        origin_value = field.default
+                        setattr(section, field_name, field.default)
+                        continue
 
                 try:
                     value = field.to_python_value(origin_value)
