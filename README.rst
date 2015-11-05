@@ -17,6 +17,7 @@ example.ini::
     [Section2]
     ip_field = 127.0.0.1
     ipport_field = 127.0.0.1:12345
+    ipport_list_field = 127.0.0.1:12345, 127.0.0.2:12346
 
 example.py::
 
@@ -32,6 +33,7 @@ example.py::
         class Section2(Section):
             ip_field = IPField()
             ipport_field = IPPortField()
+            ipport_list_field = ListField(IPPortField())
 
     try:
         config = MyConfig.load('test.ini')
@@ -45,6 +47,7 @@ example.py::
     print(config.Section1.string_field)
     print(config.Section2.ip_field)
     print(config.Section2.ipport_field)
+    print(config.Section2.ipport_list_field)
 
 output::
 

@@ -112,6 +112,26 @@ class IPPortField(Field):
         return (ip, port)
 
 
+class ListField(Field):
+    def __init__(self, element_field):
+        self.element_field = element_field
+
+    def coerce(self, value):
+        ret = []
+        for index, item in enumerate(value.split(',')):
+            item = item.strip()
+            try:
+                item_value = self.element_field.to_python_value(item)
+            except Exception as e:
+                raise ValueError("element #%d '%s' is not a valid value of '%s': %s" % (
+                    index, item,
+                    self.element_field.__class__.__name__,
+                    str(e)
+                ))
+            ret.append(item_value)
+        return ret
+
+
 class Section:
     pass
 
