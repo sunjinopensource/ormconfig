@@ -66,10 +66,6 @@ class IntField(Field):
     coerce = int
 
 
-class LongField(Field):
-    coerce = long
-
-
 class FloatField(Field):
     coerce = float
 
