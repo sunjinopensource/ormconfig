@@ -129,6 +129,27 @@ class ListField(Field):
         return ret
 
 
+class ChoiceField(Field):
+    def __init__(self, element_field, choices, default=None):
+        Field.__init__(self, default)
+        self.element_field = element_field
+        self.choices = choices
+        for choice in self.choices:
+            try:
+                element_field.to_python_value(choice)
+            except Exception as e:
+                raise ValueError("choice '%s' is not a valid value of '%s': %s" % (
+                    choice,
+                    self.element_field.__class__.__name__,
+                    str(e)
+                ))
+
+    def coerce(self, value):
+        if value not in self.choices:
+            raise ValueError("'%s' is not a valid choice in %s" % (value, self.choices))
+        return self.element_field.to_python_value(value)
+
+
 class Section:
     pass
 
