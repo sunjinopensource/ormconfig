@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.1.3
++ChoiceField
+
 ## 0.1.2
 -LongField
 +ListField

@@ -3,7 +3,7 @@ import inspect
 import codecs
 
 
-__version__ = '0.1.2'
+__version__ = '0.1.3'
 
 
 _PY2 = sys.version_info[0] == 2
